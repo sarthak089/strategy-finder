@@ -1,7 +1,7 @@
 const BASE_URL = 'https://strategy-backend-l6pa.onrender.com'
 
 export const fetchExpiries = async () => {
-  const response = await fetch('${BASE_URL}/expiries')
+  const response = await fetch('https://strategy-backend-l6pa.onrender.com/expiries')
   const data = await response.json()
   if (!data.success) throw new Error(data.error)
   return data.expiries
