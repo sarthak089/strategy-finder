@@ -11,13 +11,18 @@ export default function useStrategies() {
   const [meta, setMeta] = useState(null)
 
   useEffect(() => {
-    fetchExpiries()
-      .then(data => {
-        setExpiries(data)
-        setFilters(prev => ({ ...prev, expiry: data[1] ?? data[0] }))
-      })
-      .catch(err => console.log('Expiries error:', err))
-  }, [])
+  const loadExpiries = async () => {
+    try {
+      const data = await fetchExpiries()
+      setExpiries(data)
+      setFilters(prev => ({ ...prev, expiry: data[1] ?? data[0] }))
+    } catch (err) {
+      console.log('Expiries error, retrying in 3s:', err)
+      setTimeout(loadExpiries, 3000)
+    }
+  }
+  loadExpiries()
+}, [])
 
   const handleChange = (field) => (e) => {
     setFilters((prev) => ({ ...prev, [field]: e.target.value }))
