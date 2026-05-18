@@ -1,7 +1,5 @@
-const BASE_URL = 'https://strategy-backend-l6pa.onrender.com'
-
 export const fetchExpiries = async () => {
-  const response = await fetch('https://strategy-backend-l6pa.onrender.com/expiries')
+  const response = await fetch('https://strategy-backend-suc2.onrender.com/expiries')
   const data = await response.json()
   if (!data.success) throw new Error(data.error)
   return data.expiries
@@ -20,7 +18,7 @@ export const fetchStrategies = async (filters) => {
   if (filters.biasFilter && filters.biasFilter !== 'Any') params.append('bias', filters.biasFilter)
   if (filters.legCount && filters.legCount !== 'Up To 4') params.append('leg_count', filters.legCount)
 
-  const response = await fetch(`${BASE_URL}/strategies?${params}`)
+  const response = await fetch(`https://strategy-backend-suc2.onrender.com/strategies?${params}`)
   const data = await response.json()
 
   if (!data.success) throw new Error(data.error)
