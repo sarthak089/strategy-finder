@@ -1,12 +1,16 @@
 export default function Button({ children, onClick, variant = 'default' }) {
-  const base = 'px-4 py-2 rounded text-sm font-medium cursor-pointer transition-colors'
-  const styles = {
-    default: `${base} bg-transparent border border-gray-600 text-gray-400 hover:bg-gray-700`,
-    primary: `${base} bg-cyan-700 border border-cyan-700 text-white hover:bg-cyan-600`,
+  const base = {
+    padding: '8px 16px', borderRadius: 6, fontSize: 14, fontWeight: 600,
+    cursor: 'pointer', fontFamily: 'inherit', transition: 'all .15s',
   }
-
+  const styles = {
+    default: { ...base, background: 'transparent', border: '1px solid var(--line-2)', color: 'var(--muted)' },
+    primary: { ...base, background: 'var(--accent)', border: '1px solid var(--accent)', color: 'var(--accent-ink)' },
+  }
   return (
-    <button onClick={onClick} className={styles[variant]}>
+    <button onClick={onClick} style={styles[variant]}
+      onMouseEnter={e => { if (variant === 'primary') e.currentTarget.style.background = 'var(--accent-2)' }}
+      onMouseLeave={e => { if (variant === 'primary') e.currentTarget.style.background = 'var(--accent)' }}>
       {children}
     </button>
   )

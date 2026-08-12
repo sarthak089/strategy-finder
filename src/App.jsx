@@ -1,18 +1,21 @@
 import { useState } from 'react'
 import StrategyFinder from './components/StrategyFinder/index.jsx'
+import Landing from './components/Landing/index.jsx'
+import useTheme from './hooks/useTheme.js'
 
 export default function App() {
-  const [open, setOpen] = useState(true)
+  const [view, setView] = useState('landing') // 'landing' | 'finder'
+  const { theme, toggle } = useTheme()
+
+  if (view === 'finder') {
+    return <StrategyFinder theme={theme} onToggleTheme={toggle} onBack={() => setView('landing')} />
+  }
 
   return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-      <button
-        onClick={() => setOpen(true)}
-        className="px-4 py-2 bg-cyan-700 text-white rounded"
-      >
-        Open Strategy Finder
-      </button>
-      {open && <StrategyFinder onClose={() => setOpen(false)} />}
-    </div>
+    <Landing
+      onLaunch={() => setView('finder')}
+      theme={theme}
+      onToggleTheme={toggle}
+    />
   )
 }

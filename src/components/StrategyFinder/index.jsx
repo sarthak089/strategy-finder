@@ -1,10 +1,12 @@
-import Modal from '../common/Modal'
+import { useState } from 'react'
+import './screener.css'
 import FilterBar from './FilterBar'
 import ContextBar from './ContextBar'
 import StrategyTable from './StrategyTable'
+import PayoffPanel from './PayoffPanel'
 import useStrategies from '../../hooks/useStrategies'
 
-export default function StrategyFinder({ onClose }) {
+export default function StrategyFinder({ theme, onToggleTheme, onBack }) {
   const {
     filters,
     results,
@@ -17,58 +19,49 @@ export default function StrategyFinder({ onClose }) {
     handleFind,
   } = useStrategies()
 
+  const [selected, setSelected] = useState(null)
+
   return (
-    <Modal title="Strategy Finder" onClose={onClose}>
-      <FilterBar
-        filters={filters}
-        onChange={handleChange}
-        onReset={handleReset}
-        onFind={handleFind}
-        loading={loading}
-        expiries={expiries}
-      />
-      <ContextBar filters={filters} meta={meta} />
-      <StrategyTable
-        results={results}
-        loading={loading}
-        error={error}
-      />
-    </Modal>
+    <div className="sf-page">
+      <header className="sf-page-head">
+        <div className="sf-page-head-left">
+          <button className="sf-back" onClick={onBack} aria-label="Back to home">←</button>
+          <span className="sf-page-title"><span className="sf-page-mark">⟋</span> Strategy Finder</span>
+        </div>
+        <button className="theme-toggle" onClick={onToggleTheme}
+          aria-label={theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'}
+          title={theme === 'light' ? 'Dark mode' : 'Light mode'}>
+          {theme === 'light' ? '☾' : '☀'}
+        </button>
+      </header>
+
+      <main className="sf-page-body">
+        <div className="sf-page-inner" style={{ position: 'relative' }}>
+          <FilterBar
+            filters={filters}
+            onChange={handleChange}
+            onReset={handleReset}
+            onFind={handleFind}
+            loading={loading}
+            expiries={expiries}
+          />
+          <ContextBar filters={filters} meta={meta} />
+          <StrategyTable
+            results={results}
+            loading={loading}
+            error={error}
+            onOpen={setSelected}
+          />
+
+          {selected && (
+            <PayoffPanel
+              row={selected}
+              filters={filters}
+              onClose={() => setSelected(null)}
+            />
+          )}
+        </div>
+      </main>
+    </div>
   )
 }
-
-// import Modal from '../common/Modal'
-// import FilterBar from './FilterBar'
-// import ContextBar from './ContextBar'
-// import StrategyTable from './StrategyTable'
-// import useStrategies from '../../hooks/useStrategies'
-
-// export default function StrategyFinder({ onClose }) {
-//   const {
-//     filters,
-//     results,
-//     loading,
-//     error,
-//     handleChange,
-//     handleReset,
-//     handleFind,
-//   } = useStrategies()
-
-//   return (
-//     <Modal title="Strategy Finder" onClose={onClose}>
-//       <FilterBar
-//         filters={filters}
-//         onChange={handleChange}
-//         onReset={handleReset}
-//         onFind={handleFind}
-//         loading={loading}
-//       />
-//       <ContextBar filters={filters} />
-//       <StrategyTable
-//         results={results}
-//         loading={loading}
-//         error={error}
-//       />
-//     </Modal>
-//   )
-// }
