@@ -1,0 +1,101 @@
+/* ---- Strategy Finder modal: responsive + theme-aware ---- */
+
+.sf-modal-overlay {
+  position: fixed; inset: 0; z-index: 50;
+  background: color-mix(in srgb, var(--ink) 55%, transparent); backdrop-filter: blur(4px);
+  display: flex; align-items: flex-start; justify-content: center;
+  padding: 40px 16px;
+  font-family: var(--font-sans);
+}
+.sf-modal {
+  background: var(--panel); border: 1px solid var(--line-2); border-radius: 14px;
+  width: 100%; max-width: 1024px; overflow: hidden;
+  box-shadow: var(--shadow); color: var(--ink);
+}
+.sf-modal-head {
+  background: linear-gradient(90deg, var(--head-a), var(--head-b));
+  padding: 14px 20px; display: flex; justify-content: space-between; align-items: center;
+}
+.sf-modal-title {
+  color: #fff; font-size: 16px; font-weight: 600; margin: 0;
+  display: flex; align-items: center; gap: 9px; letter-spacing: -0.01em;
+}
+.sf-modal-mark { color: rgba(255,255,255,0.85); font-size: 18px; }
+.sf-modal-close {
+  background: transparent; border: none; color: #fff; font-size: 24px;
+  line-height: 1; cursor: pointer; padding: 0 4px; opacity: 0.85;
+}
+.sf-modal-close:hover { opacity: 1; }
+.sf-modal-body { padding: 18px 20px; }
+
+@media (max-width: 680px) {
+  .sf-modal-overlay { padding: 0; align-items: stretch; }
+  .sf-modal { max-width: 100%; border-radius: 0; border: none; min-height: 100vh; }
+  .sf-modal-body { padding: 14px; }
+}
+
+.sf-table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* filter inputs / labels */
+.sf-input {
+  background: var(--bg-2); border: 1px solid var(--line-2); color: var(--ink);
+}
+.sf-input:focus { border-color: var(--accent); }
+.sf-label { color: var(--muted); }
+
+/* context bar */
+.sf-ctx-title { color: var(--ink); font-weight: 600; }
+.sf-ctx { color: var(--muted); }
+.sf-ctx-val { color: var(--ink); }
+
+/* results table */
+.sf-table-wrap { border: 1px solid var(--line-2); border-radius: 8px; overflow: hidden; }
+.sf-thead { background: var(--bg-2); }
+.sf-th { color: var(--muted); border-bottom: 1px solid var(--line-2); }
+.sf-tbody { background: var(--panel); }
+.sf-row { border-bottom: 1px solid var(--line); }
+.sf-row:hover { background: var(--bg-2); }
+.sf-cell { color: var(--ink); }
+.sf-cell-sub { color: var(--muted); }
+.sf-empty { color: var(--dim); }
+.sf-open-btn {
+  background: transparent; border: 1px solid var(--accent); color: var(--accent);
+  padding: 4px 10px; border-radius: 4px; font-size: 12px; cursor: pointer;
+  font-family: inherit; transition: all .15s;
+}
+.sf-open-btn:hover { background: var(--accent); color: var(--accent-ink); }
+.sf-foot { color: var(--muted); border-top: 1px solid var(--line-2); }
+
+/* bias filter tabs */
+.sf-bias-bar { border-bottom: 1px solid var(--line-2); background: var(--bg-2); }
+.sf-bias-tab { background: transparent; color: var(--muted); border: 1px solid transparent; }
+.sf-bias-tab.active { background: var(--accent); color: var(--accent-ink); }
+
+/* ---- Full-page finder layout ---- */
+.sf-page {
+  min-height: 100vh; background: var(--bg); color: var(--ink);
+  font-family: var(--font-sans); display: flex; flex-direction: column;
+}
+.sf-page-head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 28px; border-bottom: 1px solid var(--line);
+  position: sticky; top: 0; z-index: 20;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+}
+.sf-page-head-left { display: flex; align-items: center; gap: 14px; }
+.sf-back {
+  background: transparent; border: 1px solid var(--line-2); color: var(--muted);
+  width: 34px; height: 34px; border-radius: 8px; cursor: pointer; font-size: 17px;
+  display: inline-flex; align-items: center; justify-content: center; transition: all .15s;
+}
+.sf-back:hover { border-color: var(--accent); color: var(--accent); }
+.sf-page-title { font-size: 17px; font-weight: 600; display: flex; align-items: center; gap: 9px; letter-spacing: -0.01em; }
+.sf-page-mark { color: var(--accent); font-size: 19px; }
+.sf-page-body { flex: 1; padding: 28px; }
+.sf-page-inner { max-width: 1200px; margin: 0 auto; }
+
+@media (max-width: 680px) {
+  .sf-page-head { padding: 14px 16px; }
+  .sf-page-body { padding: 16px; }
+}

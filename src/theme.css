@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+/* ============================================================
+   Theme tokens. Light (warm paper) is the default; dark is an
+   override applied via [data-theme="dark"] on <html>.
+   Every component reads these variables, so one attribute flip
+   re-themes the whole app.
+   ============================================================ */
+
+:root {
+  /* surfaces */
+  --bg:        #ffffff;   /* clean white */
+  --bg-2:      #f4f7fb;
+  --panel:     #ffffff;
+  --panel-2:   #f7f9fc;
+
+  /* lines */
+  --line:      #e3e8ef;
+  --line-2:    #cdd6e2;
+
+  /* text */
+  --ink:       #0f1e33;   /* deep navy-ink */
+  --muted:     #56637a;
+  --dim:       #8b96a8;
+
+  /* brand accent — blue */
+  --accent:    #2563eb;
+  --accent-2:  #1d4ed8;
+  --accent-ink:#ffffff;
+
+  /* semantic (P&L) */
+  --green:     #15803d;
+  --green-bg:  #dcfce7;
+  --red:       #dc2626;
+  --red-bg:    #fee2e2;
+  --amber:     #b45309;
+  --purple:    #7c3aed;
+
+  /* header gradient */
+  --head-a:    #1d4ed8;
+  --head-b:    #2563eb;
+
+  --shadow:    0 20px 50px rgba(37, 99, 235, 0.10);
+
+  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg:        #0b141a;
+  --bg-2:      #0f1e28;
+  --panel:     #0d1922;
+  --panel-2:   #10202b;
+
+  --line:      #1e3340;
+  --line-2:    #2a4a5a;
+
+  --ink:       #e6eef2;
+  --muted:     #9fb4bf;
+  --dim:       #6a8291;
+
+  --accent:    #38bdf8;
+  --accent-2:  #2a7b9b;
+  --accent-ink:#052430;
+
+  --green:     #4ade80;
+  --green-bg:  #16351f;
+  --red:       #f87171;
+  --red-bg:    #3a1717;
+  --amber:     #eab308;
+  --purple:    #c084fc;
+
+  --head-a:    #1a5a72;
+  --head-b:    #2a7b9b;
+
+  --shadow:    0 24px 60px rgba(0, 0, 0, 0.45);
+
+  color-scheme: dark;
+}
+
+html, body { background: var(--bg); }
+
+/* theme toggle button (used in the landing nav) */
+.theme-toggle {
+  background: transparent; border: 1px solid var(--line-2); color: var(--muted);
+  width: 34px; height: 34px; border-radius: 8px; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-sans); transition: all .15s; font-size: 15px;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
