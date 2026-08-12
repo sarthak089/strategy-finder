@@ -4,6 +4,7 @@ import FilterBar from './FilterBar'
 import ContextBar from './ContextBar'
 import StrategyTable from './StrategyTable'
 import PayoffPanel from './PayoffPanel'
+import WakingServer from './WakingServer'
 import useStrategies from '../../hooks/useStrategies'
 
 export default function StrategyFinder({ theme, onToggleTheme, onBack }) {
@@ -14,6 +15,8 @@ export default function StrategyFinder({ theme, onToggleTheme, onBack }) {
     error,
     expiries,
     meta,
+    expiriesLoading,
+    wakeAttempts,
     handleChange,
     handleReset,
     handleFind,
@@ -23,6 +26,7 @@ export default function StrategyFinder({ theme, onToggleTheme, onBack }) {
 
   return (
     <div className="sf-page">
+      {expiriesLoading && <WakingServer attempts={wakeAttempts} />}
       <header className="sf-page-head">
         <div className="sf-page-head-left">
           <button className="sf-back" onClick={onBack} aria-label="Back to home">←</button>
